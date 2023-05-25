@@ -33,3 +33,9 @@ Runners are agents or servers that are configured to execute the code defined in
 
 These Runners can also be self-hosted, meaning that not only is your codebase internal, but also the environments where your pipelines are run, increasing security and potentially reducing costs.
 Configuring self-hosted Runners involves installing the Runner software on a suitable server, registering it with your GitLab instance, and then specifying that Runner in your 'gitlab-ci.yml' file.
+
+\section{Usage in the assignment}
+
+During walking through the documentation of GitLab we realized very quickly, the most efficient way to set up GitLab is to run a container from the official GitLab container image. For the container runtime we chose Docker. As base operating system we chose Debian, Ubuntu would have been our second choice. Docker does not integrate very well with RHEL based systems as those prefer Podman.\\
+
+For our example we defined to have exactly on GitLab Runner, also Debian based with Docker runtime. The goal is to let the Runner build everything inside containers, so not additional software installation is required (beside the Runner itself).
