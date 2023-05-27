@@ -1,0 +1,35 @@
+# https://docs.gitlab.com/ee/install/docker.html
+# https://docs.gitlab.com/omnibus/settings/rpi.html#reduce-running-processes
+# https://docs.gitlab.com/omnibus/settings/ssl/index.html#change-the-default-ssl-certificate-location
+version: '3.6'
+services:
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlabtest.gruber.info'
+    environment:
+      # Basic configuration for hostname, custom ssh-port,
+      # https certificates, low memory
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlabtest.gruber.info'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        nginx['ssl_certificate'] = '/etc/gitlab/ssl/fullchain.pem'
+        nginx['ssl_certificate_key'] = '/etc/gitlab/ssl/privkey.pem'
+        puma['worker_processes'] = 2
+        sidekiq['max_concurrency'] = 9
+        prometheus_monitoring['enable'] = false
+    ports:
+      # Forward http(s) and GitLab custom ssh ports
+      - '80:80'
+      - '443:443'
+      - '2224:22'
+    volumes:
+      # Persist data for GitLab config, data and logs
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
+      # Pass certificates to container
+      - './certificates/fullchain.pem:/etc/gitlab/ssl/fullchain.pem'
+      - './certificates/privkey.pem:/etc/gitlab/ssl/privkey.pem'
+    shm_size: '256m'
+ 
