@@ -1,39 +1,30 @@
-# LaTeX-builder
-A template repo to easily build and release LaTeX documents. Just fork it and use it.
+# Report on OpenStack infrastructure
 
-## Usage
+This is a report about a service realized in the OpenStack infrastructure of FH Burgenland. It was created as part of the Master program 'Cloud Computing Engineering' in the course 'Infrastructure Engineering PT'.
 
-The pipeline builds (actions) all *.tex files from the repository root and the pdf files can be downloaded from the artifacts of the build.
+## Assignment
 
-The pipeline is running automatically after commits to `main` or `release/*` branches. The same is true for pull requests to those branches.
+An infrastructure with its own network(s) and multiple instances is to be created on the OpenStack installation of the UAS.
+One or more services should run on it.
+Ideally, these services are related to the topic of the work that is being created for the InEn ILV.
+Therefore, the participation groups are also the same as in the ILV.
+This is not directly possible with this year's requirement that everything should run on an external cloud platform.
+Therefore, for example, the results could be presented in a wiki or similar.
+However, it is also permissible that the services have nothing to do with ILV at all.
 
-If a release is generated and published, `main.pdf` is automatically added to the release as `<reponame>_<tagname>.pdf`, e.g., `LaTeX-builder_v0.0.1.pdf`. Therefore, if the release workflow is desired, you need to use `main.tex` as your main LaTeX document.
+Caution. Everything for the delivery should take place in the delivery project.
+The project InEn-22107810xx is still available for personal experiments until the end of the semester.
 
-### Initialization
+Further, a report is to be turned in describing the infrastructure.
+This should be designed in such a way that someone who takes over this infrastructure (e.g. as a successor of the admin in a company) can manage it without further inquiries.
+So all aspects like networks, IP addresses, security groups etc. should be described.
+Also, the services should be usable after reading this report.
+The report can be written either in German or English.
 
-For the release workflow it is important, that you grant the read/write permissions in Repo-Settings -> Actions -> General -> Workflow permissions
+There will be a draft submission of the report, which should already have the complete scope.
+This will allow me to give feedback before the final submission.
+The services do not have to be working at the time of the draft.
 
-### Version information
+## Realized service
 
-The file `section/versinfo.tex` holds version information and it can be included in another .tex file with:
-```
-\input{section/versinfo.tex}
-```
-
-In a normal build it will print `DRAFT ` followed by date and time, e.g. `DRAFT 2023-03-06 13:32:10`.
-In a release build it will print the tag name, e.g. v0.0.1.
-
-An example can be found in the `demo.tex` file.
-
-## Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+As the Software Development Lifecycle is all over the place nowadays, also in this program, we decided to run a local GitLab instance in OpenStack to, among other things, host git repositories and run CI tasks.
