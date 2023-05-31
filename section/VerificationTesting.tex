@@ -2,16 +2,31 @@
 
 \section{GitLab}
 
-Make sure GitLab is accessible via https and the certificate is valid.
+\subsection{Web interface}
+
+Make sure GitLab is accessible via HTTPS and the certificate is valid.
 Just take a browser and go to 'https://gitlabtest.gruber.info' and verify the browser's response.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=14cm]{images/gitlab_signup.png}
-	\caption{GitLab https response}
+	\includegraphics[width=14cm]{images/gitlab_signin.png}
+	\caption{GitLab HTTPS response}
 	\label{fig:gitlab_response}
 \end{figure}
-\  \\
+
+\subsection{GitLab Shell}
+
+Go to one of the projects and select 'Clone - Clone with SSH - Copy URL'.
+Run 'git clone' with the copied URL as parameter to clone the repository to your machine via GitLab Shell.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=14cm]{images/gitlab_shell_clone.png}
+	\caption{git clone with GitLab Shell}
+	\label{fig:gitlab_shell_clone}
+\end{figure}
+
+\subsection{Logs}
 
 The logs from GitLab can be accessed directly with the 'logs' command of 'docker compose':
 \begin{lstlisting}[language=bash,caption={GitLab Logging},label={code:gitlab-logging}]
@@ -26,7 +41,8 @@ In case a Runner is not available, follow the 'Troubleshooting GitLab Runner' FA
 
 \section{End-to-End test}
 
-To verify all functionality all together, create a new project within GitLab, for example use the '.Net Core' template.
+To verify all functionality all together you need a project containing CI jobs.
+If you do not have one have, just create a new project within GitLab, for example use the '.Net Core' template.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=14cm]{images/gitlab_create_project.png}
