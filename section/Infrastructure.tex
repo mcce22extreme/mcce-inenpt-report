@@ -20,20 +20,20 @@ That is the reason why also a router is added for this network.
 The following security groups are defined:
 \begin{itemize}
     \item Default: do not open any inbound ports, allow outgoing traffic
-    \item Webserver: Allow inbound traffic for https (port 443)
-	\item SSH: Allow inbound traffic for SSH (port 22)
+    \item gitlab: Allow inbound traffic for HTTPS (tcp port 443) and GitLab Shell (tcp port 2224)
+	\item SSH manage: Allow inbound traffic for SSH (tcp port 22)
 \end{itemize}
 
 \section{GitLab}
 
-\subsection{Machine and network configuration}
+\subsection{Machine and network configuration} \label{gitlab_machine_network_configuration}
 
 A machine named 'gitlab-ce' with flavor 'm1.large' and with 'Debian-11' as base image is used for the machine of the self-hosted GitLab instance.
 This is due to CPU, memory and software requirements of GitLab and Docker.\\
 
 A floating IP is leased and used for the 'provider' network.
-Due to the availability of the domain 'gruber.info', an A-record for the \ac{fqdn} 'gitlabtest.gruber.info' is used (\ref{fig:a_record}) and an https certificate is generated for that \ac{fqdn} via Let´s encrypt (\ref{fig:lets_encrypt}) (\cite{refCloudflareCertbot}).
-This certificate is used to prevent errors in the https communication.
+Due to the availability of the domain 'gruber.info', an A-record for the \ac{fqdn} 'gitlabtest.gruber.info' is used (\ref{fig:a_record}) and an HTTPS certificate is generated for that \ac{fqdn} via Let´s encrypt (\ref{fig:lets_encrypt}) (\cite{refCloudflareCertbot}).
+This certificate is used to prevent errors in the HTTPS communication.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=14cm]{images/a-record.png}
@@ -50,9 +50,9 @@ This certificate is used to prevent errors in the https communication.
 
 In the 'gitlabrunners' network a fixed IP of '10.0.0.99' is set for this machine, which can be used by the Runners to access GitLab.\\
 
-The used security groups are 'Default' and 'Webserver'.\\
+The used security groups are 'Default' and 'gitlab'.\\
 
-The 'SSH' security group is only enabled on demand when a login is required.
+The 'SSH manage' security group is only enabled on demand when a login is required.
 
 \subsection{OS configuration}
 
@@ -79,7 +79,7 @@ At the time of the writing only 1 Runner is created and used.\\
 
 The Runners get their IPs from the DHCP pool from the 'gitlabrunners' network.\\
 
-The used security groups are 'Default' and 'SSH'.
+The used security groups are 'Default' and 'SSH manage'.
 
 \subsection{OS configuration}
 
